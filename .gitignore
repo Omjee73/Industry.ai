@@ -1,0 +1,24 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# Node
+node_modules/
+frontend/dist/
+
+# Runtime data (generated, machine-specific)
+backend/data/app.db
+backend/data/app.db-journal
+backend/data/app.db-shm
+backend/data/app.db-wal
+backend/data/images/
+*.log
+
+# Test artifacts
+.pytest_cache/
+
+# Archify package (installed tool; diagram candidate is under .archify/)
+.agents/

@@ -1,0 +1,74 @@
+{
+  "generator": "backend/scripts/generate_dataset.py",
+  "version": 1,
+  "size": {
+    "width": 1024,
+    "height": 768
+  },
+  "components": [
+    {
+      "name": "R1",
+      "shape": "resistor",
+      "x": 0.097656,
+      "y": 0.078125,
+      "width": 0.087891,
+      "height": 0.033854
+    },
+    {
+      "name": "C1",
+      "shape": "capacitor",
+      "x": 0.322266,
+      "y": 0.104167,
+      "width": 0.044922,
+      "height": 0.033854
+    },
+    {
+      "name": "U1",
+      "shape": "chip",
+      "x": 0.605469,
+      "y": 0.117188,
+      "width": 0.146484,
+      "height": 0.101562
+    },
+    {
+      "name": "D1",
+      "shape": "diode",
+      "x": 0.830078,
+      "y": 0.104167,
+      "width": 0.019531,
+      "height": 0.03125
+    },
+    {
+      "name": "R2",
+      "shape": "resistor",
+      "x": 0.097656,
+      "y": 0.416667,
+      "width": 0.087891,
+      "height": 0.039062
+    },
+    {
+      "name": "C2",
+      "shape": "capacitor",
+      "x": 0.322266,
+      "y": 0.455729,
+      "width": 0.050781,
+      "height": 0.039062
+    },
+    {
+      "name": "U2",
+      "shape": "chip",
+      "x": 0.605469,
+      "y": 0.442708,
+      "width": 0.146484,
+      "height": 0.106771
+    },
+    {
+      "name": "D2",
+      "shape": "diode",
+      "x": 0.830078,
+      "y": 0.442708,
+      "width": 0.019531,
+      "height": 0.03125
+    }
+  ]
+}

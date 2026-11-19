@@ -1,0 +1,9 @@
+fastapi==0.122.0
+uvicorn[standard]==0.52.1
+opencv-python==4.11.0.86
+numpy==2.5.1
+scikit-image==0.25.2
+pillow==12.0.0
+SQLAlchemy==2.0.51
+httpx==0.28.1          # used by fastapi.testclient in the test suite
+pytest==8.4.2

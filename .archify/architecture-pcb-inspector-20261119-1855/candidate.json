@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "PCB Missing Component Detection — Architecture",
+    "output": "docs/architecture_diagram.html",
+    "quality_profile": "showcase"
+  },
+  "components": [
+    { "id": "operator", "type": "external", "label": "Factory operator", "sublabel": "Browser at localhost:8000", "pos": [40, 260], "size": [120, 68] },
+    { "id": "spa", "type": "frontend", "label": "PCB Inspector SPA", "sublabel": "React + Tailwind (Vite build)", "pos": [270, 260], "size": [150, 68], "tag": "4-step wizard" },
+    { "id": "api", "type": "backend", "label": "FastAPI + uvicorn", "sublabel": "REST :8000; serves frontend/dist", "pos": [500, 260], "size": [150, 68], "tag": ":8000" },
+    { "id": "db", "type": "database", "label": "SQLite store", "sublabel": "images, annotations, inspections", "pos": [730, 160], "size": [150, 68] },
+    { "id": "cv_detect", "type": "backend", "label": "CV pipeline", "sublabel": "OpenCV + scikit-image", "pos": [730, 320], "size": [150, 68], "tag": "align -> normalize -> compare -> detect" },
+    { "id": "demo", "type": "database", "label": "Demo dataset", "sublabel": "backend/data/demo (reference + 5 tests)", "pos": [270, 160], "size": [150, 68] }
+  ],
+  "boundaries": [
+    { "kind": "region", "label": "Local machine — fully offline", "wraps": ["operator", "spa", "api", "db", "cv_detect", "demo"], "pad": 20 }
+  ],
+  "connections": [
+    { "from": "operator", "to": "spa", "label": "opens http://localhost:8000", "variant": "emphasis" },
+    { "from": "spa", "to": "api", "label": "REST: uploads, annotations, inspection, export", "variant": "emphasis" },
+    { "from": "api", "to": "db", "label": "SQLite: images, annotations, inspections", "variant": "solid" },
+    { "from": "api", "to": "cv_detect", "label": "run inspection (in-process)", "variant": "solid" },
+    { "from": "demo", "to": "api", "label": "GET /api/v1/dataset/load", "variant": "dashed", "fromSide": "top", "toSide": "bottom" }
+  ],
+  "cards": [
+    { "dot": "cyan", "title": "Offline by design", "items": [
+      "No cloud, no APIs, no internet at runtime — everything runs on the local machine",
+      "FastAPI backend + React SPA built with Vite, served statically by the backend",
+      "SQLite database + images under backend/data/ (app.db + images/ + demo/)"
+    ]},
+    { "dot": "emerald", "title": "CV pipeline (classical)", "items": [
+      "aligner: ORB feature matching + RANSAC homography, phase-correlation fallback",
+      "normalizer: CLAHE + percentile stretch for lighting-invariant comparison",
+      "comparator: SSIM (skimage), pixel diff, edge coverage, surrounding-context ring",
+      "detector: weighted missing score -> present / review / missing, thresholds configurable"
+    ]},
+    { "dot": "rose", "title": "Detection flow", "items": [
+      "Reference board registered; the operator names components (rectangular annotations)",
+      "Up to 3 test images aligned to the reference, compared per named component",
+      "Results: green OK, red missing, yellow review; download JSON/CSV exports"
+    ]}
+  ]
+}

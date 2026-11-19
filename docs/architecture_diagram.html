@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>PCB Missing Component Detection — Architecture — Architecture</title>
+<style>
+:root {
+  --surface: #FAFBFC;
+  --card: #FFFFFF;
+  --elevated: #F8F9FC;
+  --fg: #1F2937;
+  --muted: #6B7280;
+  --subtle: #CBD2D9;
+  --edge: #9CA3AF;
+  --text-on-node: #FFFFFF;
+  --dot-cyan: #06b6d4;
+  --dot-emerald: #10b981;
+  --dot-rose: #F43F5E;
+  --dot-violet: #7c3aed;
+}
+.dark {
+  --surface: #0F1113;
+  --card: #15181D;
+  --elevated: #1B1F25;
+  --fg: #E8EAF0;
+  --muted: #9AA0A8;
+  --subtle: #5B5F66;
+  --edge: #474C57;
+  --text-on-node: #FFFFFF;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; background: var(--surface); color: var(--fg); font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; }
+.wrap { display: flex; align-items: flex-start; gap: 24px; padding: 28px; max-width: 1620px; margin: 0 auto; }
+.canvas-wrap { flex: 1 1 auto; min-width: 0; display: block; }
+.canvas-wrap svg { width: 100%; height: auto; display: block; border-radius: 14px; background: var(--card); box-shadow: 0 1px 2px rgba(0,0,0,0.04), 0 8px 24px rgba(0,0,0,0.06); }
+.cards-panel { flex: 0 0 290px; display: flex; flex-direction: column; gap: 12px; }
+.card { background: var(--card); border: 2px solid var(--subtle); border-radius: 14px; padding: 16px 18px; }
+.card .card-head { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.card .card-head .dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+.card .card-head h3 { font-size: 14px; font-weight: 700; margin: 0; }
+.card-items { list-style: none; padding: 0; margin: 0; font-size: 12.5px; line-height: 1.55; color: var(--muted); }
+.card-items li { display: flex; gap: 8px; align-items: flex-start; }
+.card-items li::before { content: '•'; color: var(--dot-cyan); flex: none; }
+.node .node-body { font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; }
+.node .label { font-size: 14px; font-weight: 700; color: var(--text-on-node); text-align: center; }
+.node .sublabel { font-size: 11px; color: #FFFFFF; opacity: 0.85; text-align: center; margin-top: 2px; }
+.node .tag { font-size: 10px; color: #FFFFFF; opacity: 0.9; text-align: center; margin-top: 3px; font-family: ui-monospace, monospace; }
+.edge-label { position: absolute; background: var(--surface); color: var(--muted); font-size: 11px; border: 1px solid var(--subtle); border-radius: 6px; padding: 1px 7px; white-space: nowrap; }
+.header { padding: 0 28px; border-bottom: 2px solid var(--subtle); }
+.header-row { display: flex; align-items: baseline; justify-content: space-between; }
+h1 { font-size: 22px; margin: 14px 0 2px; letter-spacing: -0.01em; }
+h1 small { display: block; font-size: 13px; color: var(--muted); font-weight: 400; margin-top: 2px; }
+.legend { display: flex; flex-wrap: wrap; gap: 8px; font-size: 11px; color: var(--muted); margin-top: 10px; }
+.legend span { display: inline-flex; align-items: center; gap: 5px; }
+.legend i { width: 10px; height: 10px; border-radius: 3px; display: inline-block; }
+footer { font-size: 11.5px; color: var(--muted); text-align: center; padding: 18px 28px; border-top: 2px solid var(--subtle); }
+@media (max-width: 1180px) {
+  .wrap { flex-direction: column; align-items: stretch; }
+  .cards-panel { flex: 1 1 auto; }
+  .canvas-wrap { min-width: 0; overflow-x: auto; }
+}
+</style>
+</head>
+<body>
+<header class="header">
+  <div class="header-row">
+    <div><h1>PCB Missing Component Detection — Architecture<small></small></h1></div>
+  </div>
+  <p style="font-size:13px;color:var(--muted);margin:4px 0 0;">Architecture of the PCB Missing Component Detection application (Task B). Fully offline, web-only.</p>
+</header>
+<main class="wrap">
+  <div class="canvas-wrap">
+    <svg viewBox='0 0 900 408' width='100%' height='408px' preserveAspectRatio='xMidYMid'>
+<rect width='100%' height='100%' rx='12' fill='var(--surface)'/>
+<rect x='20' y='140' width='880' height='268' rx='8' fill='none' stroke='var(--edge)' stroke-width='1.2' stroke-dasharray='7 5'/>
+<text x='24' y='138' font-size='12' fill='var(--fg)' font-weight='600' opacity='0.85'>Local machine — fully offline</text>
+<line x1='162.0' y1='294.0' x2='268.0' y2='294.0' stroke='var(--edge)' stroke-width='2.4'/><defs><marker id='arrow-31164' markerWidth='9' markerHeight='7' refX='8' refY='3.5' orient='auto' marker-end='true'><polygon points='0 0, 9 3.5, 0 7' fill='var(--edge)'/></marker></defs>
+<line x1='162.0' y1='294.0' x2='268.0' y2='294.0' stroke='var(--edge)' stroke-width='2.4' marker-end='url(#arrow-31164)'/>
+<line x1='422.0' y1='294.0' x2='498.0' y2='294.0' stroke='var(--edge)' stroke-width='2.4'/><defs><marker id='arrow-22344' markerWidth='9' markerHeight='7' refX='8' refY='3.5' orient='auto' marker-end='true'><polygon points='0 0, 9 3.5, 0 7' fill='var(--edge)'/></marker></defs>
+<line x1='422.0' y1='294.0' x2='498.0' y2='294.0' stroke='var(--edge)' stroke-width='2.4' marker-end='url(#arrow-22344)'/>
+<line x1='652.0' y1='294.0' x2='728.0' y2='194.0' stroke='var(--edge)' stroke-width='1.6'/><defs><marker id='arrow-87544' markerWidth='9' markerHeight='7' refX='8' refY='3.5' orient='auto' marker-end='true'><polygon points='0 0, 9 3.5, 0 7' fill='var(--edge)'/></marker></defs>
+<line x1='652.0' y1='294.0' x2='728.0' y2='194.0' stroke='var(--edge)' stroke-width='1.6' marker-end='url(#arrow-87544)'/>
+<line x1='652.0' y1='294.0' x2='728.0' y2='354.0' stroke='var(--edge)' stroke-width='1.6'/><defs><marker id='arrow-16776' markerWidth='9' markerHeight='7' refX='8' refY='3.5' orient='auto' marker-end='true'><polygon points='0 0, 9 3.5, 0 7' fill='var(--edge)'/></marker></defs>
+<line x1='652.0' y1='294.0' x2='728.0' y2='354.0' stroke='var(--edge)' stroke-width='1.6' marker-end='url(#arrow-16776)'/>
+<line x1='422.0' y1='194.0' x2='498.0' y2='294.0' stroke='var(--edge)' stroke-dasharray='7 6' stroke-width='1.6'/><defs><marker id='arrow-27456' markerWidth='9' markerHeight='7' refX='8' refY='3.5' orient='auto' marker-end='true'><polygon points='0 0, 9 3.5, 0 7' fill='var(--edge)'/></marker></defs>
+<line x1='422.0' y1='194.0' x2='498.0' y2='294.0' stroke='var(--edge)' stroke-dasharray='7 6' stroke-width='1.6' marker-end='url(#arrow-27456)'/>
+<g class='node' transform='translate(40,260)'>
+  <rect x='0' y='0' width='120' height='68' rx='10' fill='#FFFFFF' stroke='#475569' stroke-width='2.5'/>
+  <foreignObject x='0' y='0' width='120' height='68' pointer-events='none'><div class='node-body'><div class='label' style='color:#475569'>Factory operator</div><div class='sublabel'>Browser at localhost:8000</div></div></foreignObject>
+</g>
+<g class='node' transform='translate(270,260)'>
+  <rect x='0' y='0' width='150' height='68' rx='10' fill='#FFFFFF' stroke='#3b82f6' stroke-width='2.5'/>
+  <foreignObject x='0' y='0' width='150' height='68' pointer-events='none'><div class='node-body'><div class='label' style='color:#3b82f6'>PCB Inspector SPA</div><div class='sublabel'>React + Tailwind (Vite build)</div><div class='tag'>4-step wizard</div></div></foreignObject>
+</g>
+<g class='node' transform='translate(500,260)'>
+  <rect x='0' y='0' width='150' height='68' rx='10' fill='#FFFFFF' stroke='#f97316' stroke-width='2.5'/>
+  <foreignObject x='0' y='0' width='150' height='68' pointer-events='none'><div class='node-body'><div class='label' style='color:#f97316'>FastAPI + uvicorn</div><div class='sublabel'>REST :8000; serves frontend/dist</div><div class='tag'>:8000</div></div></foreignObject>
+</g>
+<g class='node' transform='translate(730,160)'>
+  <rect x='0' y='0' width='150' height='68' rx='10' fill='#FFFFFF' stroke='#0891b2' stroke-width='2.5'/>
+  <foreignObject x='0' y='0' width='150' height='68' pointer-events='none'><div class='node-body'><div class='label' style='color:#0891b2'>SQLite store</div><div class='sublabel'>images, annotations, inspections</div></div></foreignObject>
+</g>
+<g class='node' transform='translate(730,320)'>
+  <rect x='0' y='0' width='150' height='68' rx='10' fill='#FFFFFF' stroke='#f97316' stroke-width='2.5'/>
+  <foreignObject x='0' y='0' width='150' height='68' pointer-events='none'><div class='node-body'><div class='label' style='color:#f97316'>CV pipeline</div><div class='sublabel'>OpenCV + scikit-image</div><div class='tag'>align -&gt; normalize -&gt; compare -&gt; detect</div></div></foreignObject>
+</g>
+<g class='node' transform='translate(270,160)'>
+  <rect x='0' y='0' width='150' height='68' rx='10' fill='#FFFFFF' stroke='#0891b2' stroke-width='2.5'/>
+  <foreignObject x='0' y='0' width='150' height='68' pointer-events='none'><div class='node-body'><div class='label' style='color:#0891b2'>Demo dataset</div><div class='sublabel'>backend/data/demo (reference + 5 tests)</div></div></foreignObject>
+</g>
+<div class='edge-label' style='left:155.0px;top:272.0px;'>opens http://localhost:8000</div>
+<div class='edge-label' style='left:400.0px;top:272.0px;'>REST: uploads, annotations, inspection, export</div>
+<div class='edge-label' style='left:630.0px;top:222.0px;'>SQLite: images, annotations, inspections</div>
+<div class='edge-label' style='left:630.0px;top:302.0px;'>run inspection (in-process)</div>
+<div class='edge-label' style='left:400.0px;top:222.0px;'>GET /api/v1/dataset/load</div>
+</svg>
+    <div class="legend">
+      <span><i style="background:#475569"></i> external · <i style="background:#3b82f6"></i> frontend ·
+      <i style="background:#f97316"></i> backend · <i style="background:#0891b2"></i> database ·
+      <i style="background:#dc2626"></i> security · <i style="background:#7c3aed"></i> messagebus ·
+      <i style="background:#0ea5e9"></i> cloud</span>
+    </div>
+  </div>
+  <aside class="cards-panel"><article class='card'>
+  <div class='card-head'><span class='dot' style='background:var(--dot-cyan, #06b6d4)'></span>  <h3>Offline by design</h3></div>
+  <ul class='card-items'><li>No cloud, no APIs, no internet at runtime — everything runs on the local machine</li><li>FastAPI backend + React SPA built with Vite, served statically by the backend</li><li>SQLite database + images under backend/data/ (app.db + images/ + demo/)</li></ul>
+</article><article class='card'>
+  <div class='card-head'><span class='dot' style='background:var(--dot-emerald, #06b6d4)'></span>  <h3>CV pipeline (classical)</h3></div>
+  <ul class='card-items'><li>aligner: ORB feature matching + RANSAC homography, phase-correlation fallback</li><li>normalizer: CLAHE + percentile stretch for lighting-invariant comparison</li><li>comparator: SSIM (skimage), pixel diff, edge coverage, surrounding-context ring</li><li>detector: weighted missing score -&gt; present / review / missing, thresholds configurable</li></ul>
+</article><article class='card'>
+  <div class='card-head'><span class='dot' style='background:var(--dot-rose, #06b6d4)'></span>  <h3>Detection flow</h3></div>
+  <ul class='card-items'><li>Reference board registered; the operator names components (rectangular annotations)</li><li>Up to 3 test images aligned to the reference, compared per named component</li><li>Results: green OK, red missing, yellow review; download JSON/CSV exports</li></ul>
+</article></aside>
+</main>
+<footer>Generated by backend/scripts/generate_architecture_html.py from
+<code>.archify/architecture-pcb-inspector-*/candidate.json</code>. Offline: everything shown runs on the local machine.</footer>
+<script>
+  // Theme toggle via prefers-color-scheme (reacts to system setting).
+  if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    document.documentElement.classList.add('dark');
+  }
+  window.addEventListener('load', () => {
+    window.addEventListener('click', () => {
+      document.documentElement.classList.toggle('dark', window.matchMedia('(prefers-color-scheme: dark)').matches);
+    }, { passive: true });
+  });
+</script>
+</body>
+</html>
