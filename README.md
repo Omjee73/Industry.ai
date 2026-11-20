@@ -1,4 +1,4 @@
-# PCB Missing Component Detection — Task B
+# PCB Missing Component Detection — Task B - By Omjee Gupta | IIT Madras | 24f2002843
 
 A desktop-friendly, fully offline web application that detects missing components
 on PCB boards: upload a good reference board, name its parts, then upload test
@@ -8,6 +8,12 @@ photos of the same board and see which named parts are missing.
 > when the project was built. The implementation follows the task description in
 > the session (see [docs/architecture_diagram.html](docs/architecture_diagram.html)
 > and [RESEARCH.md](RESEARCH.md)).
+
+## Interface
+<img width="1477" height="697" alt="image" src="https://github.com/user-attachments/assets/bff937b8-991e-4ddd-a055-d15fc53faf43" />
+<img width="1481" height="700" alt="image" src="https://github.com/user-attachments/assets/f1928996-3fee-40f1-b6a5-5837005044d4" />
+
+
 
 ## Overview
 
