@@ -301,3 +301,7 @@ browser's screenshot tool or OpenCode's browser tool after running the app.)
 - Python ≥ 3.11 (`backend/requirements.txt`: fastapi, uvicorn, opencv-python,
   numpy, scikit-image, pillow, SQLAlchemy, httpx, pytest)
 - Node.js ≥ 18 (`frontend/package.json`: react, vite, tailwindcss, lucide-react, …)
+
+## Contributing
+
+Contributions are welcome! See [CONTRIBUTING.md](CONTRIBUTING.md) for setup, how to run the tests, and the pull-request process.
