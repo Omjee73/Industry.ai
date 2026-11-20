@@ -9,12 +9,6 @@ photos of the same board and see which named parts are missing.
 > the session (see [docs/architecture_diagram.html](docs/architecture_diagram.html)
 > and [RESEARCH.md](RESEARCH.md)).
 
-## Interface
-<img width="1477" height="697" alt="image" src="https://github.com/user-attachments/assets/bff937b8-991e-4ddd-a055-d15fc53faf43" />
-<img width="1481" height="700" alt="image" src="https://github.com/user-attachments/assets/f1928996-3fee-40f1-b6a5-5837005044d4" />
-
-
-
 ## Overview
 
 The app answers: *"On this photo of the board, is every named component there?"*
@@ -224,6 +218,8 @@ python -m scripts.generate_dataset
   context ring comparison, configurable thresholds.
 - At runtime the frontend calls only `/api/v1/*` on the same origin (the backend
   also serves the SPA statically at `/`).
+  <img width="1470" height="697" alt="image" src="https://github.com/user-attachments/assets/0bd3041e-2fc8-460f-bf99-aa1ef29f719d" />
+
 
 ## Screenshots section
 
@@ -234,6 +230,9 @@ named rectangles (step 2), status pills per test image (green OK / red missing /
 yellow review), result tables with per-component confidence and explanations,
 and JSON/CSV download buttons (step 4). (Screenshots can be captured with your
 browser's screenshot tool or OpenCode's browser tool after running the app.)
+
+<img width="1477" height="697" alt="image" src="https://github.com/user-attachments/assets/bff937b8-991e-4ddd-a055-d15fc53faf43" />
+<img width="1481" height="700" alt="image" src="https://github.com/user-attachments/assets/f1928996-3fee-40f1-b6a5-5837005044d4" />
 
 ## Troubleshooting
 
